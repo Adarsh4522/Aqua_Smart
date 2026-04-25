@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     volumes:
       - mongo_data:/data/db
+    networks:
+      - default
 
   backend:
     build:
@@ -21,6 +23,7 @@ services:
     ports:
       - "4000:4000"
     networks:
+      - default
       - proxy-net
 
   frontend:
