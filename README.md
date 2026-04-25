@@ -76,7 +76,7 @@ npm install
 
 Ensure a `.env` file exists in the `backend/` folder with the following:
 ```env
-PORT=5000
+PORT=4000
 MONGO_URI=mongodb://localhost:27017/smart_water_platform
 JWT_SECRET=super_secret_dev_key
 JWT_EXPIRE=30d
@@ -86,7 +86,7 @@ Start the development server:
 ```bash
 npm run dev
 ```
-*(Backend API is now live at `http://localhost:5000`)*
+*(Backend API is now live at `http://localhost:4000`)*
 
 ### Step 2: Frontend Setup
 Because the frontend uses vanilla HTML/CSS/JS, there is **no build step required**.
@@ -148,4 +148,3 @@ smart-water-platform/
 ```
 
 ---
-
