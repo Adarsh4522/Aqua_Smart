@@ -31,11 +31,11 @@ services:
     ports:
       - "3000:80"
     networks:
-      - proxy_net
+      - proxy-net
 
 volumes:
   mongo_data:
 
 networks:
-  proxy_net:
+  proxy-net:
     external: true
