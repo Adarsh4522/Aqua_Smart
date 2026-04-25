@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><a href="index.html"><i class="fa-solid fa-droplet"></i> AquaSmart</a></div>
+    <nav class="sidebar-nav">
+      <a href="admin.html" class="active"><span class="nav-icon"><i class="fa-solid fa-gauge"></i></span> Admin Dashboard</a>
+      <a href="tips.html"><span class="nav-icon"><i class="fa-solid fa-lightbulb"></i></span> Browse Tips</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">A</div>
+        <div>
+          <div style="font-size:0.875rem;font-weight:600" id="sidebar-username">Admin</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)" id="sidebar-role">Administrator</div>
+        </div>
+      </div>
+      <button id="logout-btn" class="btn btn-outline btn-sm btn-full" style="margin-top:0.75rem">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <h3 style="font-size:1rem;font-weight:600">Admin Control Panel</h3>
+      <span class="badge badge-red">Admin Access</span>
+    </div>
+
+    <div class="page-content">
+      <div id="admin-alert" class="alert"></div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:1.75rem">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-info"><div class="stat-value" id="stat-users">—</div><div class="stat-label">Total Users</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fa-solid fa-plug"></i></div>
+          <div class="stat-info"><div class="stat-value" id="stat-devices">—</div><div class="stat-label">Registered Devices</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber"><i class="fa-solid fa-droplet"></i></div>
+          <div class="stat-info"><div class="stat-value" id="stat-water">—</div><div class="stat-label">Total Water Logged</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fa-solid fa-clock"></i></div>
+          <div class="stat-info"><div class="stat-value" id="stat-pending">—</div><div class="stat-label">Pending Providers</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa-solid fa-lightbulb"></i></div>
+          <div class="stat-info"><div class="stat-value" id="stat-tips">—</div><div class="stat-label">Published Tips</div></div>
+        </div>
+      </div>
+
+      <!-- Tabs (MISSING LOGIC IMPLEMENTED: added tab-all-tips) -->
+      <div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem">
+        <button class="tab-btn btn btn-primary btn-sm active" data-tab="tab-users">
+          <i class="fa-solid fa-users"></i> Users
+        </button>
+        <button class="tab-btn btn btn-outline btn-sm" data-tab="tab-tips">
+          <i class="fa-solid fa-clock"></i> Pending Tips
+        </button>
+        <button class="tab-btn btn btn-outline btn-sm" data-tab="tab-all-tips">
+          <i class="fa-solid fa-list-check"></i> Published Tips
+        </button>
+        <button class="tab-btn btn btn-outline btn-sm" data-tab="tab-devices">
+          <i class="fa-solid fa-plug"></i> Registered Devices
+        </button>
+      </div>
+
+      <!-- Users Tab -->
+      <div id="tab-users" class="tab-panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Name / Email</th><th>Role</th><th>Status</th><th>Joined</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="users-tbody">
+              <tr><td colspan="5" style="text-align:center;padding:2rem"><div class="spinner"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pending Tips Tab -->
+      <div id="tab-tips" class="tab-panel" style="display:none">
+        <div id="pending-tips" style="display:flex;flex-direction:column;gap:1rem">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <!-- All Tips Tab -->
+      <div id="tab-all-tips" class="tab-panel" style="display:none">
+        <div id="all-tips" style="display:flex;flex-direction:column;gap:1rem">
+          <div class="spinner"></div>
+        </div>
+      </div>
+
+      <!-- Devices Tab -->
+      <div id="tab-devices" class="tab-panel" style="display:none">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Device</th><th>Owner</th><th>Usage Profile</th><th>Status</th></tr>
+            </thead>
+            <tbody id="devices-tbody">
+              <tr><td colspan="4" style="text-align:center;padding:2rem"><div class="spinner"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

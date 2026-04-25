@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Usage Log — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><a href="index.html"><i class="fa-solid fa-droplet"></i> AquaSmart</a></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"><span class="nav-icon"><i class="fa-solid fa-house"></i></span> Dashboard</a>
+      <a href="devices.html"><span class="nav-icon"><i class="fa-solid fa-plug"></i></span> My Devices</a>
+      <a href="usage.html" class="active"><span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span> Usage Log</a>
+      <a href="goals.html"><span class="nav-icon"><i class="fa-solid fa-bullseye"></i></span> Goals</a>
+      <a href="tips.html"><span class="nav-icon"><i class="fa-solid fa-lightbulb"></i></span> Tips</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">U</div>
+        <div>
+          <div style="font-size:0.875rem;font-weight:600" id="sidebar-username">User</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)" id="sidebar-role">User</div>
+        </div>
+      </div>
+      <button id="logout-btn" class="btn btn-outline btn-sm btn-full" style="margin-top:0.75rem">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <h3 style="font-size:1rem;font-weight:600">Water Usage Log</h3>
+      <div style="display:flex;align-items:center;gap:1rem">
+        <span style="font-size:0.9rem;color:var(--text-muted)">This Month: </span>
+        <strong id="monthly-total" style="color:var(--primary)">— L</strong>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div id="usage-alert" class="alert"></div>
+
+      <div style="display:grid;grid-template-columns:340px 1fr;gap:1.5rem;align-items:start">
+
+        <!-- Log Form -->
+        <div class="card">
+          <h4 style="margin-bottom:1.25rem"><i class="fa-solid fa-plus-circle" style="color:var(--primary)"></i> Log Water Usage</h4>
+          <form id="usage-form">
+            <div class="form-group">
+              <label>Device</label>
+              <select id="log-device" name="device" class="form-control" required>
+                <option value="">Select device...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Amount Used (Litres)</label>
+              <input type="number" name="liters" class="form-control" placeholder="e.g. 45" min="0" step="0.1" required />
+            </div>
+            <div class="form-group">
+              <label>Duration (minutes, optional)</label>
+              <input type="number" name="duration" class="form-control" placeholder="e.g. 10" min="0" />
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <input type="datetime-local" name="date" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Notes (optional)</label>
+              <input type="text" name="notes" class="form-control" placeholder="e.g. Long shower today" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <i class="fa-solid fa-floppy-disk"></i> Save Log
+            </button>
+          </form>
+        </div>
+
+        <!-- Chart + Table -->
+        <div style="display:flex;flex-direction:column;gap:1.25rem">
+          <div class="card">
+            <h4 style="margin-bottom:1rem">7-Day Trend</h4>
+            <canvas id="usage-chart" height="160"></canvas>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden">
+            <div style="padding:1rem 1.25rem;border-bottom:1px solid var(--border)">
+              <h4>Recent Usage History</h4>
+            </div>
+            <div class="table-wrap" style="border:none;border-radius:0">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Device</th><th>Amount</th><th>Duration</th><th>Date</th><th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody id="usage-tbody">
+                  <tr><td colspan="5" style="text-align:center;padding:2rem"><div class="spinner"></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/usage.js"></script>
+</body>
+</html>

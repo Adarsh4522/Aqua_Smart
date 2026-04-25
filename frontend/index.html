@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaSmart — Smart Water Conservation</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .bg-animation {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      z-index: -1;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    }
+    .blob {
+      position: absolute;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.6;
+      animation: float 20s infinite ease-in-out alternate;
+    }
+    .blob-1 {
+      width: 500px; height: 500px;
+      background: #bae6fd;
+      top: -100px; left: -100px;
+    }
+    .blob-2 {
+      width: 600px; height: 600px;
+      background: #7dd3fc;
+      bottom: -200px; right: -100px;
+      animation-delay: -5s;
+    }
+    .blob-3 {
+      width: 400px; height: 400px;
+      background: #38bdf8;
+      top: 30%; left: 40%;
+      animation-delay: -10s;
+      opacity: 0.3;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(100px, 50px) scale(1.1); }
+      100% { transform: translate(-50px, 100px) scale(0.9); }
+    }
+  </style>
+</head>
+
+<body style="min-height:100vh;display:flex;flex-direction:column;position:relative;z-index:1;background:transparent">
+  <div class="bg-animation">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <nav style="display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem">
+    <div style="font-size:1.5rem;font-weight:700;color:var(--text-primary)"><i class="fa-solid fa-droplet"
+        style="color:var(--primary)"></i> AquaSmart</div>
+    <div style="display:flex;gap:1.5rem">
+      <a href="tips.html" class="btn btn-outline">Browse Tips</a>
+      <a href="login.html" class="btn btn-primary">Login / Register</a>
+    </div>
+  </nav>
+
+  <main style="flex:1;display:flex;align-items:center;justify-content:center;padding:4rem 2rem">
+    <div style="max-width:800px;text-align:center">
+      <h1
+        style="font-size:3.5rem;margin-bottom:1.5rem;line-height:1.2;background:-webkit-linear-gradient(45deg, var(--primary), #2dd4bf);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">
+        Track. Optimize. Conserve.
+      </h1>
+      <p style="font-size:1.25rem;color:var(--text-secondary);margin-bottom:3rem">
+        Join the smart water revolution. Connect your devices, monitor your usage in real-time, and get tailored
+        insights to help save water and reduce bills.
+      </p>
+
+      <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:4rem">
+        <a href="register.html" class="btn btn-primary" style="font-size:1.1rem;padding:0.75rem 2rem">Get Started
+          Free</a>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;text-align:left">
+        <div class="card">
+          <div style="font-size:2rem;margin-bottom:1rem;color:var(--primary)"><i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <h4>Real-time Analytics</h4>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-top:0.5rem">Monitor exactly where and when you use
+            water with interactive charts.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:2rem;margin-bottom:1rem;color:var(--success)"><i class="fa-solid fa-bullseye"></i></div>
+          <h4>Set Monthly Goals</h4>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-top:0.5rem">Define usage limits and track your
+            progress to stay under budget.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:2rem;margin-bottom:1rem;color:var(--warning)"><i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <h4>Expert Insights</h4>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-top:0.5rem">Get location-aware conservation tips
+            curated by verified service providers.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background-color:var(--bg-card);border-top:1px solid var(--border);padding:4rem 2rem 2rem;margin-top:auto;position:relative;z-index:10;">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:3rem;margin-bottom:3rem;">
+      
+      <div>
+        <div style="font-size:1.5rem;font-weight:700;color:var(--text-primary);margin-bottom:1rem;">
+          <i class="fa-solid fa-droplet" style="color:var(--primary)"></i> AquaSmart
+        </div>
+        <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.6;margin-bottom:1.5rem;">
+          Empowering communities and individuals to track, optimize, and conserve water through smart data analytics.
+        </p>
+        <div style="display:flex;gap:1.25rem;">
+          <a href="#" style="color:var(--text-muted);font-size:1.25rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" style="color:var(--text-muted);font-size:1.25rem;transition:color 0.2s" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fa-brands fa-github"></i></a>
+          <a href="#" style="color:var(--text-muted);font-size:1.25rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="color:var(--text-primary);margin-bottom:1.2rem;font-weight:600;">Platform</h4>
+        <ul style="display:flex;flex-direction:column;gap:0.75rem;">
+          <li><a href="login.html" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Sign In</a></li>
+          <li><a href="register.html" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Create Account</a></li>
+          <li><a href="tips.html" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Conservation Tips</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:var(--text-primary);margin-bottom:1.2rem;font-weight:600;">Resources</h4>
+        <ul style="display:flex;flex-direction:column;gap:0.75rem;">
+          <li><a href="#" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Documentation</a></li>
+          <li><a href="#" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">API Reference</a></li>
+          <li><a href="#" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Support Center</a></li>
+          <li><a href="#" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Blog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color:var(--text-primary);margin-bottom:1.2rem;font-weight:600;">Legal</h4>
+        <ul style="display:flex;flex-direction:column;gap:0.75rem;">
+          <li><a href="#" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Privacy Policy</a></li>
+          <li><a href="#" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Terms of Service</a></li>
+          <li><a href="#" style="color:var(--text-secondary);font-size:0.9rem;transition:color 0.2s" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-secondary)'">Cookie Policy</a></li>
+        </ul>
+      </div>
+
+    </div>
+    
+    <div style="text-align:center;padding-top:2rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.875rem;">
+      &copy; 2026 AquaSmart Platform. Built for a sustainable future.
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script>redirectIfLoggedIn();</script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo"><i class="fa-solid fa-droplet"></i> AquaSmart</div>
+      
+      <p class="auth-subtitle">Join thousands saving water every day</p>
+
+      <div id="reg-alert" class="alert"></div>
+
+      <!-- Role Selector -->
+      <label style="font-size:0.875rem;font-weight:500;color:var(--text-secondary);margin-bottom:0.4rem;display:block">I
+        am a...</label>
+      <div class="role-selector" style="display:flex;gap:0.5rem;margin-bottom:1rem">
+        <button type="button" class="role-btn selected" data-role="user" onclick="selectRole('user', this)">👤 User</button>
+        <button type="button" class="role-btn" data-role="provider" onclick="selectRole('provider', this)">🏢 Provider</button>
+        <button type="button" class="role-btn" data-role="admin" onclick="selectRole('admin', this)">🛡️ Admin</button>
+      </div>
+      <div id="provider-note"
+        style="display:none;font-size:0.8rem;color:var(--warning);margin-bottom:1rem;padding:0.5rem;background:rgba(245,158,11,0.08);border-radius:6px;border:1px solid rgba(245,158,11,0.2)">
+        ⚠️ Provider accounts require admin validation before full access is granted.
+      </div>
+      <div id="admin-note"
+        style="display:none;font-size:0.8rem;color:var(--danger);margin-bottom:1rem;padding:0.5rem;background:rgba(239,68,68,0.08);border-radius:6px;border:1px solid rgba(239,68,68,0.2)">
+        🛑 Quick Test Mode: Admin registration directly enabled for testing.
+      </div>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="reg-name" class="form-control" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="reg-email" class="form-control" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="reg-password" class="form-control" placeholder="At least 6 characters" required />
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem">
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" id="reg-city" class="form-control" placeholder="Mumbai" />
+          </div>
+          <div class="form-group">
+            <label>State</label>
+            <input type="text" id="reg-state" class="form-control" placeholder="MH" />
+          </div>
+          <div class="form-group">
+            <label>Country</label>
+            <input type="text" id="reg-country" class="form-control" placeholder="India" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="reg-btn">
+          <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account? <a href="login.html">Sign in →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    redirectIfLoggedIn();
+    let selectedRole = 'user';
+
+    function selectRole(role, el) {
+      selectedRole = role;
+      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('provider-note').style.display = role === 'provider' ? 'block' : 'none';
+      document.getElementById('admin-note').style.display = role === 'admin' ? 'block' : 'none';
+    }
+
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('reg-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating account...';
+
+      try {
+        const data = await Auth.register({
+          name: document.getElementById('reg-name').value.trim(),
+          email: document.getElementById('reg-email').value.trim(),
+          password: document.getElementById('reg-password').value,
+          role: selectedRole,
+          city: document.getElementById('reg-city').value.trim(),
+          state: document.getElementById('reg-state').value.trim(),
+          country: document.getElementById('reg-country').value.trim()
+        });
+
+        saveSession(data.token, data.user);
+
+        if (data.user.role === 'admin') location.href = 'admin.html';
+        else if (data.user.role === 'provider') location.href = 'provider.html';
+        else location.href = 'dashboard.html';
+      } catch (err) {
+        showAlert('reg-alert', err.message || 'Registration failed. Please try again.');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Create Account';
+      }
+    });
+  </script>
+</body>
+
+</html>

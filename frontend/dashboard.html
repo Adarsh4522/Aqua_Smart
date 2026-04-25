@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo"><a href="index.html"><i class="fa-solid fa-droplet"></i> AquaSmart</a></div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="active"><span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+          Dashboard</a>
+        <a href="devices.html"><span class="nav-icon"><i class="fa-solid fa-plug"></i></span> My Devices</a>
+        <a href="usage.html"><span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span> Usage Log</a>
+        <a href="goals.html"><span class="nav-icon"><i class="fa-solid fa-bullseye"></i></span> Goals</a>
+        <a href="tips.html"><span class="nav-icon"><i class="fa-solid fa-lightbulb"></i></span> Tips</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar" id="sidebar-avatar">U</div>
+          <div>
+            <div style="font-size:0.875rem;font-weight:600" id="sidebar-username">User</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)" id="sidebar-role">User</div>
+          </div>
+        </div>
+        <button id="logout-btn" class="btn btn-outline btn-sm btn-full" style="margin-top:0.75rem">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-content">
+      <div class="topbar">
+        <h3 id="welcome-name" style="font-size:1rem;font-weight:600">Welcome back! 👋</h3>
+        <a href="usage.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Log Usage</a>
+      </div>
+
+      <div class="page-content">
+
+        <!-- Stats Row -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-droplet"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="monthly-total">—</div>
+              <div class="stat-label">Used This Month</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-plug"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="device-count">—</div>
+              <div class="stat-label">Active Devices</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" style="font-size:1rem;padding-top:0.25rem" id="goal-quick">Set Goals</div>
+              <div class="stat-label">Monthly Target</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.25rem;margin-bottom:1.5rem">
+          <div class="card">
+            <h4 style="margin-bottom:1rem">Weekly Usage (Last 7 Days)</h4>
+            <canvas id="usage-chart" height="220"></canvas>
+          </div>
+          <div class="card">
+            <h4 style="margin-bottom:1rem">Usage by Device</h4>
+            <canvas id="device-chart" height="220"></canvas>
+          </div>
+        </div>
+
+        <!-- Goal + Daily Tip -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
+          <div class="card">
+            <h4 style="margin-bottom:1rem"><i class="fa-solid fa-bullseye" style="color:var(--primary)"></i> Monthly
+              Goal Progress</h4>
+            <div id="goal-section">
+              <div class="spinner"></div>
+            </div>
+            <a href="goals.html"
+              style="display:inline-block;margin-top:1rem;font-size:0.85rem;color:var(--primary)">Manage Goals →</a>
+          </div>
+          <div class="card" style="background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(6,182,212,0.05))">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem">
+              <i class="fa-solid fa-lightbulb" style="color:var(--warning)"></i>
+              <h4>Today's Water Tip</h4>
+              <span class="badge badge-amber" id="daily-tip-category">general</span>
+            </div>
+            <h4 id="daily-tip-title" style="color:var(--primary);margin-bottom:0.5rem">Loading tip...</h4>
+            <p id="daily-tip-body" style="font-size:0.875rem">Fetching a personalized tip for you...</p>
+            <a href="tips.html"
+              style="display:inline-block;margin-top:1rem;font-size:0.85rem;color:var(--primary)">Browse All Tips →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Water-Saving Tips — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><a href="index.html"><i class="fa-solid fa-droplet"></i> AquaSmart</a></div>
+    <nav class="sidebar-nav">
+      <!-- User links -->
+      <a href="dashboard.html" data-role="user"><span class="nav-icon"><i class="fa-solid fa-house"></i></span> Dashboard</a>
+      <a href="devices.html" data-role="user"><span class="nav-icon"><i class="fa-solid fa-plug"></i></span> My Devices</a>
+      <a href="usage.html" data-role="user"><span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span> Usage Log</a>
+      <a href="goals.html" data-role="user"><span class="nav-icon"><i class="fa-solid fa-bullseye"></i></span> Goals</a>
+      
+      <!-- Provider links -->
+      <a href="provider.html" data-role="provider"><span class="nav-icon"><i class="fa-solid fa-building"></i></span> My Portal</a>
+      
+      <!-- Admin links -->
+      <a href="admin.html" data-role="admin"><span class="nav-icon"><i class="fa-solid fa-gauge"></i></span> Admin Dashboard</a>
+      
+      <!-- Shared link -->
+      <a href="tips.html" class="active"><span class="nav-icon"><i class="fa-solid fa-lightbulb"></i></span> Tips</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">G</div>
+        <div>
+          <div style="font-size:0.875rem;font-weight:600" id="sidebar-username">Guest</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)" id="sidebar-role">Not logged in</div>
+        </div>
+      </div>
+      <button id="logout-btn" class="btn btn-outline btn-sm btn-full" style="margin-top:0.75rem">
+        <i class="fa-solid fa-right-from-bracket"></i> Login
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <h3 style="font-size:1rem;font-weight:600">Water-Saving Tips</h3>
+    </div>
+
+    <div class="page-content">
+      <!-- Search & Filter -->
+      <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem">
+        <input type="text" id="tip-search" class="form-control" placeholder="🔍 Search tips..." style="max-width:300px"/>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Categories</button>
+        <button class="filter-btn" data-filter="shower">🚿 Shower</button>
+        <button class="filter-btn" data-filter="garden">🌿 Garden</button>
+        <button class="filter-btn" data-filter="kitchen">🍳 Kitchen</button>
+        <button class="filter-btn" data-filter="laundry">👕 Laundry</button>
+        <button class="filter-btn" data-filter="toilet">🚽 Toilet</button>
+        <button class="filter-btn" data-filter="irrigation">🌱 Irrigation</button>
+        <button class="filter-btn" data-filter="general">💧 General</button>
+      </div>
+
+      <div id="tips-grid" class="tip-grid">
+        <div class="spinner" style="grid-column:1/-1"></div>
+      </div>
+      <div id="tips-empty" style="display:none;text-align:center;padding:4rem;color:var(--text-muted)">
+        <div style="font-size:4rem;margin-bottom:1rem">💧</div>
+        <h4>No tips found</h4>
+        <p>Try a different category or search term.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/tips.js"></script>
+<script>
+  // initialize auth display even if not logged in (tips are public)
+  if (localStorage.getItem('swp_token')) {
+    populateSidebarUser();
+    applyRoleVisibility();
+    setActiveNav();
+    const logoutBtn = document.getElementById('logout-btn');
+    logoutBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Logout';
+    logoutBtn.addEventListener('click', logout);
+  } else {
+    document.getElementById('logout-btn').addEventListener('click', () => location.href = 'login.html');
+  }
+</script>
+</body>
+</html>

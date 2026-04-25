@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo"><i class="fa-solid fa-droplet"></i> AquaSmart</div>
+    <p class="auth-subtitle">Welcome back! Sign in to your account</p>
+
+    <div id="login-alert" class="alert"></div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="login-email" class="form-control" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required />
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="register.html">Create one →</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  redirectIfLoggedIn();
+
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('login-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Signing in...';
+
+    try {
+      const data = await Auth.login({
+        email: document.getElementById('login-email').value,
+        password: document.getElementById('login-password').value
+      });
+
+      saveSession(data.token, data.user);
+
+      if (data.user.role === 'admin') location.href = 'admin.html';
+      else if (data.user.role === 'provider') location.href = 'provider.html';
+      else location.href = 'dashboard.html';
+    } catch (err) {
+      showAlert('login-alert', err.message || 'Login failed. Please try again.');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In';
+    }
+  });
+</script>
+</body>
+</html>

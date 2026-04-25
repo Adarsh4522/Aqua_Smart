@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Devices — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo"><a href="index.html"><i class="fa-solid fa-droplet"></i> AquaSmart</a></div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html"><span class="nav-icon"><i class="fa-solid fa-house"></i></span> Dashboard</a>
+        <a href="devices.html" class="active"><span class="nav-icon"><i class="fa-solid fa-plug"></i></span> My
+          Devices</a>
+        <a href="usage.html"><span class="nav-icon"><i class="fa-solid fa-chart-bar"></i></span> Usage Log</a>
+        <a href="goals.html"><span class="nav-icon"><i class="fa-solid fa-bullseye"></i></span> Goals</a>
+        <a href="tips.html"><span class="nav-icon"><i class="fa-solid fa-lightbulb"></i></span> Tips</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar" id="sidebar-avatar">U</div>
+          <div>
+            <div style="font-size:0.875rem;font-weight:600" id="sidebar-username">User</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)" id="sidebar-role">User</div>
+          </div>
+        </div>
+        <button id="logout-btn" class="btn btn-outline btn-sm btn-full" style="margin-top:0.75rem">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <div class="topbar">
+        <div class="page-title" style="margin:0">
+          <h3 style="font-size:1rem;font-weight:600">My Devices <span class="badge badge-blue"
+              id="device-count">0</span></h3>
+        </div>
+        <button id="add-device-btn" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-plus"></i> Add Device
+        </button>
+      </div>
+
+      <div class="page-content">
+        <div id="devices-alert" class="alert"></div>
+        <div id="devices-grid"
+          style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem"></div>
+        <div id="devices-empty" style="display:none;text-align:center;padding:4rem;color:var(--text-muted)">
+          <div style="font-size:4rem;margin-bottom:1rem">🚰</div>
+          <h4>No devices yet</h4>
+          <p>Add your first water-consuming device to start tracking usage.</p>
+          <button id="add-device-btn-empty" onclick="openModal()" class="btn btn-primary" style="margin-top:1rem">
+            <i class="fa-solid fa-plus"></i> Add Device
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT MODAL -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h4 id="modal-title">Add New Device</h4>
+        <button class="modal-close" id="modal-close">×</button>
+      </div>
+      <form id="device-form">
+        <div class="form-group">
+          <label>Device Name</label>
+          <input type="text" name="name" class="form-control" placeholder="e.g. Master Bedroom Shower" required />
+        </div>
+        <div class="form-group">
+          <label>Device Type</label>
+          <select name="type" class="form-control" required>
+            <option value="">Select type...</option>
+            <option value="shower">🚿 Shower</option>
+            <option value="tap">🚰 Tap / Faucet</option>
+            <option value="irrigation">🌿 Irrigation / Garden</option>
+            <option value="dishwasher">🍽️ Dishwasher</option>
+            <option value="washing_machine">👕 Washing Machine</option>
+            <option value="toilet">🚽 Toilet</option>
+            <option value="other">💧 Other</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+          <div class="form-group">
+            <label>Brand (optional)</label>
+            <input type="text" name="brand" class="form-control" placeholder="e.g. Jaquar" />
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" name="location" class="form-control" placeholder="e.g. Kitchen" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Avg. Usage Per Day (Litres)</label>
+          <input type="number" name="avgUsagePerDay" class="form-control" placeholder="e.g. 60" min="0" step="0.5" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full"><i class="fa-solid fa-floppy-disk"></i> Save
+          Device</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/devices.js"></script>
+</body>
+
+</html>

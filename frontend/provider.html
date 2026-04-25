@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Provider Portal — AquaSmart</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><a href="index.html"><i class="fa-solid fa-droplet"></i> AquaSmart</a></div>
+    <nav class="sidebar-nav">
+      <a href="provider.html" class="active"><span class="nav-icon"><i class="fa-solid fa-building"></i></span> My Portal</a>
+      <a href="tips.html"><span class="nav-icon"><i class="fa-solid fa-lightbulb"></i></span> Browse Tips</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebar-avatar">P</div>
+        <div>
+          <div style="font-size:0.875rem;font-weight:600" id="sidebar-username">Provider</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)" id="sidebar-role">Provider</div>
+        </div>
+      </div>
+      <button id="logout-btn" class="btn btn-outline btn-sm btn-full" style="margin-top:0.75rem">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <h3 style="font-size:1rem;font-weight:600">Provider Portal</h3>
+    </div>
+
+    <div class="page-content">
+
+      <!-- Pending Approval Banner -->
+      <div id="pending-banner" style="display:none;margin-bottom:1.5rem;padding:1rem 1.25rem;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:var(--radius);color:#fcd34d">
+        <i class="fa-solid fa-clock"></i> <strong>Your account is pending admin approval.</strong> You can submit tips, but they won't be published until your account is verified.
+      </div>
+
+      <div id="tip-alert" class="alert"></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start">
+
+        <!-- Submit New Tip -->
+        <div class="card">
+          <h4 style="margin-bottom:1.25rem"><i class="fa-solid fa-lightbulb" style="color:var(--warning)"></i> Submit a Water-Saving Tip</h4>
+          <form id="tip-submit-form">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" name="title" class="form-control" placeholder="e.g. Fix leaky faucets immediately" required />
+            </div>
+            <div class="form-group">
+              <label>Tip Content</label>
+              <textarea name="body" class="form-control" rows="4" placeholder="Detailed water-saving tip content..." style="resize:vertical" required></textarea>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+              <div class="form-group">
+                <label>Category</label>
+                <select name="category" class="form-control" required>
+                  <option value="general">💧 General</option>
+                  <option value="shower">🚿 Shower</option>
+                  <option value="garden">🌿 Garden</option>
+                  <option value="kitchen">🍳 Kitchen</option>
+                  <option value="laundry">👕 Laundry</option>
+                  <option value="toilet">🚽 Toilet</option>
+                  <option value="irrigation">🌱 Irrigation</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Season</label>
+                <select name="season" class="form-control">
+                  <option value="all">All Seasons</option>
+                  <option value="summer">Summer</option>
+                  <option value="winter">Winter</option>
+                  <option value="monsoon">Monsoon</option>
+                  <option value="spring">Spring</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Location (city/region, optional)</label>
+              <input type="text" name="location" class="form-control" placeholder="e.g. Bangalore, Rajasthan" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <i class="fa-solid fa-paper-plane"></i> Submit for Review
+            </button>
+          </form>
+        </div>
+
+        <!-- My Submitted Tips -->
+        <div class="card">
+          <h4 style="margin-bottom:1rem"><i class="fa-solid fa-list" style="color:var(--primary)"></i> My Submitted Tips</h4>
+          <div id="my-tips-list"><div class="spinner"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/tips.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    if (!requireAuth()) return;
+    const user = getCurrentUser();
+    if (user.role === 'admin') { location.href = 'admin.html'; return; }
+    if (user.role === 'user') { location.href = 'dashboard.html'; return; }
+
+    populateSidebarUser();
+    setActiveNav();
+    document.getElementById('logout-btn').addEventListener('click', logout);
+
+    if (!user.isApproved) {
+      document.getElementById('pending-banner').style.display = 'block';
+    }
+
+    await loadMyTips();
+  });
+</script>
+</body>
+</html>
