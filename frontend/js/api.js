@@ -3,7 +3,7 @@
    All fetch() calls to the backend go here.
    ============================================= */
 
-const API_BASE = 'http://backend:4000/api';
+const API_BASE = '/api';
 
 function getToken() {
   return localStorage.getItem('swp_token');
