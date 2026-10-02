@@ -662,3 +662,259 @@ tbody tr:last-child td {
   font-size: 0.9rem;
   color: var(--text-muted);
 }
+
+/* =============================================
+   AQUASMART LANDING PAGE - MOBILE RESPONSIVE
+   ============================================= */
+
+/* Prevent horizontal scrolling */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Background blobs should not cause horizontal overflow */
+.bg-animation {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+
+  /* -----------------------------
+     NAVBAR
+     ----------------------------- */
+
+  nav {
+    padding: 1rem !important;
+    gap: 1rem;
+  }
+
+  nav > div:first-child {
+    font-size: 1.25rem !important;
+    white-space: nowrap;
+  }
+
+  nav > div:last-child {
+    gap: 0.5rem !important;
+  }
+
+  nav .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+
+  /* -----------------------------
+     HERO SECTION
+     ----------------------------- */
+
+  main {
+    padding: 2.5rem 1rem !important;
+  }
+
+  main > div {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  main h1 {
+    font-size: 2.3rem !important;
+    line-height: 1.15 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  main p {
+    font-size: 1rem !important;
+    line-height: 1.6;
+    margin-bottom: 2rem !important;
+  }
+
+
+  /* -----------------------------
+     GET STARTED BUTTON
+     ----------------------------- */
+
+  main > div > div {
+    margin-bottom: 2.5rem !important;
+  }
+
+  main .btn-primary {
+    font-size: 1rem !important;
+    padding: 0.7rem 1.5rem !important;
+  }
+
+
+  /* -----------------------------
+     FEATURE CARDS
+     ----------------------------- */
+
+  main > div > div:last-child {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    width: 100%;
+  }
+
+  main .card {
+    width: 100%;
+    padding: 1.25rem;
+  }
+
+  main .card h4 {
+    font-size: 1.05rem;
+  }
+
+  main .card p {
+    font-size: 0.9rem !important;
+    margin-bottom: 0 !important;
+  }
+
+
+  /* -----------------------------
+     BACKGROUND BLOBS
+     ----------------------------- */
+
+  .blob-1 {
+    width: 300px;
+    height: 300px;
+    left: -150px;
+    top: -80px;
+  }
+
+  .blob-2 {
+    width: 350px;
+    height: 350px;
+    right: -180px;
+    bottom: -100px;
+  }
+
+  .blob-3 {
+    width: 250px;
+    height: 250px;
+    left: 30%;
+  }
+
+
+  /* -----------------------------
+     FOOTER
+     ----------------------------- */
+
+  footer {
+    padding: 2.5rem 1.25rem 1.5rem !important;
+  }
+
+  footer > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  footer > div:first-child > div {
+    width: 100%;
+  }
+
+  footer h4 {
+    margin-bottom: 0.75rem !important;
+  }
+
+  footer > div:last-child {
+    padding-top: 1.5rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+
+/* =============================================
+   SMALL PHONES
+   ============================================= */
+
+@media (max-width: 480px) {
+
+  nav {
+    padding: 0.85rem !important;
+  }
+
+  nav > div:first-child {
+    font-size: 1.1rem !important;
+  }
+
+  nav .btn {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.72rem;
+  }
+
+  main {
+    padding: 2rem 0.9rem !important;
+  }
+
+  main h1 {
+    font-size: 2rem !important;
+  }
+
+  main p {
+    font-size: 0.95rem !important;
+  }
+
+  main .btn-primary {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  main .card {
+    padding: 1rem;
+  }
+
+  .blob-1 {
+    width: 220px;
+    height: 220px;
+  }
+
+  .blob-2 {
+    width: 280px;
+    height: 280px;
+  }
+
+  .blob-3 {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+
+/* =============================================
+   VERY SMALL PHONES
+   ============================================= */
+
+@media (max-width: 360px) {
+
+  nav {
+    flex-direction: column;
+    align-items: center !important;
+  }
+
+  nav > div:last-child {
+    width: 100%;
+    justify-content: center;
+  }
+
+  nav .btn {
+    font-size: 0.75rem;
+  }
+
+  main h1 {
+    font-size: 1.8rem !important;
+  }
+
+  main p {
+    font-size: 0.9rem !important;
+  }
+
+  main .btn-primary {
+    max-width: 100%;
+  }
+}
