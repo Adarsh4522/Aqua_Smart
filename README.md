@@ -1,150 +1,203 @@
 # 💧 AquaSmart — Smart Water Conservation Platform
 
-A full-stack web application designed to help individuals, households, and communities track, optimize, and conserve water. AquaSmart features role-based access control, interactive data visualization, real-time goal tracking, and expert-curated water-saving strategies.
+<p align="center">
+
+# 💧 AquaSmart — Smart Water Conservation Platform
+
+<p align="center">
+  <strong>A full-stack smart water conservation platform for tracking, analyzing, and optimizing water usage.</strong>
+</p>
+
+<p align="center">
+
+[![Live Website](https://img.shields.io/badge/Live%20Website-AquaSmart-00A86B?style=for-the-badge)](https://aqua.itsadarsh.site)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/Adarsh4522/Aqua_Smart)
+[![Azure](https://img.shields.io/badge/Deployed%20on-Microsoft%20Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
+
+</p>
 
 ---
 
-## ✨ Key Features & Modules
+## 🌐 Live Demo
 
-### 1. User Dashboard & Analytics Layer
-- **Interactive Charts**: Visualizes water usage over the last 7 days (Bar/Line charts via Chart.js).
-- **Device Breakdown**: Doughnut chart showing consumption split across connected appliances.
-- **Goal Tracking**: Animated SVG progress rings showing monthly consumption vs set allowance limit.
+🚀 **Live Website:**  
+https://aqua.itsadarsh.site
 
-### 2. Device Management
-- Register and categorize distinct water-consuming devices (Shower, Tap, Irrigation, Washing Machine, Toilet, Dishwasher).
-- Track specific daily average consumption benchmarks.
+💻 **GitHub Repository:**  
+https://github.com/Adarsh4522/Aqua_Smart
 
-### 3. Smart Usage Logging
-- Event-based usage logging with dynamic calculation mapping amounts (in Litres), duration, and contextual notes.
+AquaSmart is deployed on a Microsoft Azure Ubuntu Virtual Machine and uses Docker, Docker Compose, Nginx Proxy Manager, and Let's Encrypt SSL for production deployment.
 
-### 4. Expert Tips System
-- Browse categorized, location-aware water conservation strategies.
-- **Provider Portal**: Verified service experts can submit new tips dynamically.
+> 💡 Create your own User or Provider account to explore the application.
 
-### 5. Administrative Control Panel
-- Platform-wide statistics overview (total users, devices, water logged).
-- Role management & Provider verification (approve/revoke expert credentials to publish tips).
-- **Tip Moderation**: Review pending tips from providers and forcefully manage/delete any published tips.
+> 🔐 Admin credentials are private and are not included in this repository.
 
 ---
 
-## 🛠 Technology Stack
+# ✨ Key Features
 
-### Backend
-- **Runtime**: Node.js (v18+)
-- **Framework**: Express.js
-- **Database**: MongoDB & Mongoose (ODM)
-- **Security & Env**: JWT (Stateless access tokens mapped to LocalStorage), `bcryptjs` (password hashing), `dotenv`, `cors`.
+## 👤 1. User Dashboard & Analytics
 
-### Frontend
-- **Languages**: Vanilla HTML5, CSS3, JavaScript (ES6+). No heavy frameworks used, optimizing bundle weight.
-- **System Design**: Modular UI (api helpers, auth guards, page-specific JS controllers).
-- **Aesthetics**: Custom dark-mode CSS variables array, responsive sidebar grids, animated notifications.
-- **Libraries**: Chart.js (via CDN), Font Awesome (v6).
+The User Dashboard provides a centralized overview of water consumption and conservation progress.
 
----
+### Features
 
-## 🔄 System Architecture
+- 📊 Interactive water usage charts
+- 📈 Seven-day consumption visualization
+- 💧 Total water consumption tracking
+- 🎯 Water conservation goal tracking
+- 📊 Device-based consumption analysis
+- 📅 Usage history
+- 🔔 Notifications and alerts
+- 📈 Consumption statistics
 
-> The frontend communicates asynchronously with the backend RESTful API. JSON Web Tokens (JWT) are securely handled in headers to validate roles before any core CRUD operations take place.
-
-```mermaid
-graph TD
-    FE["Frontend Client (Vanilla HTML/CSS/JS)"]
-    BE["Backend Server (Node.js + Express)"]
-    DB["Database (MongoDB Atlas / Local)"]
-
-    FE -- "fetch() / REST API" --> BE
-    BE -- "Mongoose Schema" --> DB
-```
+Charts and analytics are visualized using **Chart.js**.
 
 ---
 
-## 🚀 Quick Start & Installation
+## 🚿 2. Device Management
 
-### Prerequisites
-- Node.js installed locally.
-- MongoDB running locally (port 27017) or a MongoDB Atlas connection URI.
+Users can manage their water-consuming devices.
 
-### Step 1: Backend Setup
-Open a terminal and navigate to the backend directory:
-```bash
-cd backend
-npm install
-```
+### Supported Devices
 
-Ensure a `.env` file exists in the `backend/` folder with the following:
-```env
-PORT=4000
-MONGO_URI=mongodb://localhost:27017/smart_water_platform
-JWT_SECRET=super_secret_dev_key
-JWT_EXPIRE=30d
-```
+- 🚿 Shower
+- 🚰 Tap
+- 🌱 Irrigation
+- 🧺 Washing Machine
+- 🚽 Toilet
+- 🍽️ Dishwasher
 
-Start the development server:
-```bash
-npm run dev
-```
-*(Backend API is now live at `http://localhost:4000`)*
+### Device Operations
 
-### Step 2: Frontend Setup
-Because the frontend uses vanilla HTML/CSS/JS, there is **no build step required**.
-
-**Option A (Simply Open):**
-Double-click `frontend/index.html` to open it in your browser natively.
-
-**Option B (Local Server - Recommended):**
-```bash
-npx serve frontend
-```
-*(Access the app at `http://localhost:3000`)*
+- Add devices
+- Update device information
+- Delete devices
+- Activate or deactivate devices
+- Track average daily consumption
+- Associate devices with users
 
 ---
 
-## 🔐 Access Roles & Test Strategy
+## 💧 3. Smart Water Usage Logging
 
-| Role | Access Permissions | UI Views |
-|------|--------------------|----------|
-| **User** (Default) | Manage devices, log usage, set target goals, view public tips | Dashboard, Devices, Logs, Goals, Tips |
-| **Provider** | Submit new water-saving strategies. Requires Admin approval to publish. | Provider Portal, Tips |
-| **Admin** | View platform stats, approve provider accounts, manage users, delete/publish tips. | Admin Panel, Tips |
+Users can record and monitor their water consumption.
 
-### How to test the Admin Panel
-1. Register a new account via the UI (`admin@test.com`).
-2. By default, the account is a `user`. 
-3. Open MongoDB Compass (or Mongo Shell) and manually grant admin privileges:
-```javascript
-db.users.updateOne({ email: "admin@test.com" }, { $set: { role: "admin" } })
-```
-4. Log back in to access the Admin Panel. From there, you can easily promote other users to Admin via the UI without touching the database again.
+Each usage record can contain:
+
+- Device
+- Water consumption in litres
+- Duration
+- Date and time
+- Contextual notes
+
+The backend processes usage records to generate dashboard statistics and consumption summaries.
 
 ---
 
-## 📂 Project Structure
+## 🎯 4. Water Conservation Goals
+
+Users can create and monitor personal water conservation goals.
+
+### Goal Features
+
+- Create conservation goals
+- Define consumption targets
+- Track progress
+- Monitor consumption limits
+- View goal status
+- Visual progress indicators
+
+---
+
+## 💡 5. Expert Water-Saving Tips
+
+AquaSmart provides practical recommendations to help users reduce water consumption.
+
+Users can:
+
+- Browse published tips
+- View categorized recommendations
+- Read expert water-saving strategies
+- Access location-related recommendations
+- Discover practical conservation techniques
+
+---
+
+## 🏢 6. Provider Portal
+
+Providers can contribute expert water-saving recommendations.
+
+Provider accounts require administrator approval.
+
+### Provider Features
+
+- Provider registration
+- Provider verification
+- Submit water-saving tips
+- View submitted tips
+- Contribute expert recommendations
+
+Submitted tips remain pending until approved by an administrator.
+
+---
+
+## 🛡️ 7. Administrative Control Panel
+
+The Admin Dashboard provides centralized management of the platform.
+
+### Admin Features
+
+- 👥 View registered users
+- 📊 View platform statistics
+- 🏢 Approve provider accounts
+- 🚫 Manage provider approval
+- 💡 Review pending tips
+- ✅ Approve submitted tips
+- 🗑️ Delete tips
+- 📱 View registered devices
+- 👤 Manage user roles
+
+All administrative functionality is protected by authentication and role-based authorization.
+
+---
+
+# 🔐 Authentication & Security
+
+AquaSmart implements authentication and role-based access control.
+
+## Authentication Technologies
+
+- 🔑 JSON Web Tokens (JWT)
+- 🔒 bcryptjs password hashing
+- 🛡️ Protected API routes
+- 👥 Role-based authorization
+- 🌐 HTTPS
+- 🔐 Environment variables
+- 🛡️ Admin-only API protection
+
+Passwords are hashed using **bcryptjs** before being stored in MongoDB.
+
+JWT tokens are used to authenticate protected API requests.
+
+---
+
+## 👥 Access Roles
+
+| Role | Access |
+|------|--------|
+| 👤 **User** | Dashboard, devices, usage logs, goals and water-saving tips |
+| 🏢 **Provider** | Provider portal and water-saving tip submission |
+| 🛡️ **Admin** | Platform management, provider approval, tip moderation, statistics and device management |
+
+---
+
+## 🛡️ Admin Registration Security
+
+Admin accounts **cannot be created through the public registration page**.
+
+Public registration only allows:
 
 ```text
-smart-water-platform/
-├── backend/
-│   ├── config/db.js          # DB Connection Logic
-│   ├── controllers/          # Business logic handlers
-│   ├── middleware/           # auth.js (JWT validation & role guards)
-│   ├── models/               # Mongoose DB Schemas (User, Device, Tip, Goal, UsageLog)
-│   ├── routes/               # Express API routing mappings
-│   ├── .env                  # Environment Variables
-│   └── server.js             # Initializer & Port binding
-└── frontend/
-    ├── css/style.css         # Complete UI Design System
-    ├── js/
-    │   ├── admin.js          # Admin tools & tab switching logic
-    │   ├── api.js            # Standardized fetch wrappers & payload processing
-    │   ├── auth.js           # Shared token session guards & UI mutators
-    │   ├── dashboard.js      # Main chart rendering and aggregation mapping
-    │   ├── devices.js        # CRUD for appliance inventory
-    │   ├── goals.js          # SVG Progress visualization & targets
-    │   ├── tips.js           # Search/Filtering logic & provider submission
-    │   └── usage.js          # Datetime logging and history grids
-    └── *.html                # Independent views mapped to controllers
-```
-
----
+User
+Provider
