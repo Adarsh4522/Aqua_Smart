@@ -19,14 +19,32 @@ const register = async (req, res) => {
     }
 
     // Providers need admin approval
-    const isApproved = role === 'provider' ? false : true;
+   // Admin registration is not allowed through the public registration API
+if (role === 'admin') {
+  return res.status(403).json({
+    success: false,
+    message: 'Admin registration is not allowed.'
+  });
+}
 
-    const user = await User.create({
-      name, email, password,
-      role: role || 'user',
-      isApproved,
-      location: { city: city || '', state: state || '', country: country || '' }
-    });
+// Only user and provider accounts can be created publicly
+const safeRole = role === 'provider' ? 'provider' : 'user';
+
+// Providers need admin approval
+const isApproved = safeRole === 'provider' ? false : true;
+
+const user = await User.create({
+  name,
+  email,
+  password,
+  role: safeRole,
+  isApproved,
+  location: {
+    city: city || '',
+    state: state || '',
+    country: country || ''
+  }
+});
 
     const token = generateToken(user._id);
     res.status(201).json({

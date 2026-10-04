@@ -24,16 +24,12 @@
       <div class="role-selector" style="display:flex;gap:0.5rem;margin-bottom:1rem">
         <button type="button" class="role-btn selected" data-role="user" onclick="selectRole('user', this)">👤 User</button>
         <button type="button" class="role-btn" data-role="provider" onclick="selectRole('provider', this)">🏢 Provider</button>
-        <button type="button" class="role-btn" data-role="admin" onclick="selectRole('admin', this)">🛡️ Admin</button>
-      </div>
+          </div>
       <div id="provider-note"
         style="display:none;font-size:0.8rem;color:var(--warning);margin-bottom:1rem;padding:0.5rem;background:rgba(245,158,11,0.08);border-radius:6px;border:1px solid rgba(245,158,11,0.2)">
         ⚠️ Provider accounts require admin validation before full access is granted.
       </div>
-      <div id="admin-note"
-        style="display:none;font-size:0.8rem;color:var(--danger);margin-bottom:1rem;padding:0.5rem;background:rgba(239,68,68,0.08);border-radius:6px;border:1px solid rgba(239,68,68,0.2)">
-        🛑 Quick Test Mode: Admin registration directly enabled for testing.
-      </div>
+    
 
       <form id="register-form">
         <div class="form-group">
@@ -79,13 +75,18 @@
     redirectIfLoggedIn();
     let selectedRole = 'user';
 
-    function selectRole(role, el) {
-      selectedRole = role;
-      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
-      el.classList.add('selected');
-      document.getElementById('provider-note').style.display = role === 'provider' ? 'block' : 'none';
-      document.getElementById('admin-note').style.display = role === 'admin' ? 'block' : 'none';
-    }
+   function selectRole(role, el) {
+  selectedRole = role;
+
+  document.querySelectorAll('.role-btn').forEach(b => {
+    b.classList.remove('selected');
+  });
+
+  el.classList.add('selected');
+
+  document.getElementById('provider-note').style.display =
+    role === 'provider' ? 'block' : 'none';
+}
 
     document.getElementById('register-form').addEventListener('submit', async (e) => {
       e.preventDefault();

@@ -37,22 +37,41 @@ const approveUser = async (req, res) => {
 // @desc    Change user role
 // @route   PUT /api/admin/users/:id/role
 // @access  Private/Admin
+
 const changeUserRole = async (req, res) => {
   try {
     const { role } = req.body;
-    if (!['user', 'provider', 'admin'].includes(role)) {
-      return res.status(400).json({ success: false, message: 'Invalid role' });
+
+    // Admin accounts cannot be created or assigned through this endpoint
+    if (!['user', 'provider'].includes(role)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid role. Admin role cannot be assigned.'
+      });
     }
 
     const user = await User.findByIdAndUpdate(
       req.params.id,
-      { role, isApproved: role === 'admin' ? true : false },
+      {
+        role,
+        isApproved: role === 'provider' ? false : true
+      },
       { new: true, runValidators: true }
     ).select('-password');
 
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
     res.json({ success: true, user });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server Error' });
+    res.status(500).json({
+      success: false,
+      message: 'Server Error'
+    });
   }
 };
 
