@@ -2,9 +2,6 @@
 
 <p align="center">
 
-# 💧 AquaSmart — Smart Water Conservation Platform
-
-<p align="center">
   <strong>A full-stack smart water conservation platform for tracking, analyzing, and optimizing water usage.</strong>
 </p>
 
@@ -23,8 +20,6 @@
 🚀 **Live Website:**  
 https://aqua.itsadarsh.site
 
-💻 **GitHub Repository:**  
-https://github.com/Adarsh4522/Aqua_Smart
 
 AquaSmart is deployed on a Microsoft Azure Ubuntu Virtual Machine and uses Docker, Docker Compose, Nginx Proxy Manager, and Let's Encrypt SSL for production deployment.
 
